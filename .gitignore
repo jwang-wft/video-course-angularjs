@@ -10,7 +10,6 @@
 *.zip
 *.mp4
 *.jpg
-*.png
 
 # dependencies
 /node_modules
