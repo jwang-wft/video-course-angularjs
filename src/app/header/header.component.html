@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" >
+  <span>
+    <a routerLink="/"><mat-icon>home</mat-icon>视频编程课主页</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li  *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/course" routerLinkActive="mat-accent">免费课</a>
+    </li>
+    <li  *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/advanced" routerLinkActive="mat-accent">高级课</a>
+    </li>
+    <li  *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/create" routerLinkActive="mat-accent">新课</a>
+    </li>
+    <li  *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent">登录</a>
+    </li>
+    <li  *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">注册</a>
+    </li>
+  </ul>
+</mat-toolbar>

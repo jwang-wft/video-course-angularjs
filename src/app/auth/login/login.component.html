@@ -1,0 +1,15 @@
+<app-header></app-header>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput type="email" name="email" ngModel placeholder="邮箱" #emailInput="ngModel" required email>
+      <mat-error *ngIf="emailInput.invalid">请注意邮箱地址格式</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" name="password" ngModel matInput placeholder="密码" #passwordInput="ngModel" required>
+      <mat-error *ngIf="passwordInput.invalid">请输入正确的登录码 </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">登录</button>
+  </form>
+</mat-card>

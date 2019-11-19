@@ -1,0 +1,87 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" class="sidenav">
+    <mat-toolbar color="primary">
+      <div class="search">
+        <input mat-input placeholder="课程查询" type="search">
+        <button mat-icon-button matTooltip="查询">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div class="content options">
+      <div>
+        <mat-select class="select" [(value)]="selectedTopicId" placeholder="选择课程类别">
+          <mat-option *ngFor="let topic of topics" [value]="topic.id">
+            {{topic.title}}
+          </mat-option>
+        </mat-select>
+        <button mat-icon-button matTooltip="刷新" (click)="onLoad()">
+          <mat-icon>launch</mat-icon>
+        </button>
+      </div>
+      <mat-accordion multi="true">
+        <mat-expansion-panel *ngFor="let section of sections">
+          <mat-expansion-panel-header>
+            {{ section.title }}
+          </mat-expansion-panel-header>
+          <div *ngFor="let lecture of section.lectures">
+            <button mat-icon-Button class="btn" value="{{lecture.videoFilePath}}" (click)="onLectureChanged(lecture)">
+              <mat-icon class="lectureIcon">video_call</mat-icon>{{lecture.title}}
+            </button>
+          </div>
+          <a download="{{section.zipFilePath}}" href="http://localhost:8000/videos/{{section.zipFilePath}}">{{section.zipFilePath}}</a>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="mat-toolbar mat-primary mat-toolbar-single-row footer">
+      <div class="badges">
+        <a href="https://badge.fury.io/js/mat-video" target="_blank">
+          <img alt="npm version" src="https://badge.fury.io/js/mat-video.svg">
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav #leftSidenave mode="side" position="end" class="leftSidenave">
+    <textarea rows="100" cols="80">
+      {{ sourceCode }}
+    </textarea>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()" matTooltip="选课">
+        <mat-icon>list</mat-icon>
+      </button>
+
+      <span class="title">
+        <span class="name">{{ maintitile }}</span>
+        <font size="2"> (Angular {{version}})</font>
+      </span>
+
+      <a mat-icon-button href="http://localhost:4200" class="github" matTooltip="返回主页">
+        <mat-icon>home</mat-icon>
+      </a>
+    </mat-toolbar>
+
+    <div class="content video">
+      <video [src]="src" [poster]="poster" controls>
+        Sorry, your browser doesn't support embedded videos,
+      </video>
+    </div>
+
+    <div class="mat-toolbar mat-primary mat-toolbar-single-row footer">
+      <div class="version">
+        Version {{appversion}}
+      </div>
+      <div class="copyright">
+        <button mat-icon-button (click)="leftSidenave.toggle()" matTooltip="源码">
+          <mat-icon>description</mat-icon>
+          <!--list, home, help，settings, notes, -->
+        </button>
+      </div>
+      <div class="license">
+        Powered by Spring Boot
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
